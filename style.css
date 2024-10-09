@@ -1,0 +1,81 @@
+body {
+    background-color: #f9f9f9;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .header {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .input-group .form-control {
+    border-radius: 0;
+  }
+
+  .box {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-weight: bold;
+    color: #333;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+
+  .highlight {
+    background-color: #ffc107 !important;
+  }
+
+  .found {
+    background-color: #4caf50 !important;
+    color: #fff;
+  }
+
+  .not-found {
+    background-color: #f44336 !important;
+    color: #fff;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .bottom-nav button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #3f51b5;
+    background-color: #fff;
+    color: #3f51b5;
+    transition: 0.3s;
+  }
+
+  .bottom-nav button:hover {
+    background-color: #3f51b5;
+    color: #fff;
+  }
