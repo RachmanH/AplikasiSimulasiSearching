@@ -107,69 +107,73 @@
 
     // Exponential Search function
     function exponentialSearch(arr, key) {
-      let n = arr.length;
-      if (arr[0] === key) {
-        displayResult(0, key, true);
-        return;
-      }
-
-      let i = 1;
-      while (i < n && arr[i] <= key) {
-        highlightBox(i);
-        i = i * 2;
-      }
-
-      binarySearch(arr, i / 2, Math.min(i, n - 1), key);
-    }
-
-    // Binary Search function
-    function binarySearch(arr, left, right, key) {
-      let boxes = document.querySelectorAll('.box');
-
-      function search(left, right) {
-        if (left <= right) {
-          let mid = Math.floor((left + right) / 2);
-          highlightBox(mid);
-
-          setTimeout(() => {
-            if (arr[mid] === key) {
-              displayResult(mid, key, true);
-            } else if (arr[mid] < key) {
-              search(mid + 1, right);
-            } else {
-              search(left, mid - 1);
-            }
-          }, 1000);
+        let n = arr.length;
+        let i = 1;
+        let boxes = document.querySelectorAll('.box');
+  
+        function highlightExponential() {
+          if (i < n && arr[i] <= key) {
+            boxes[i].classList.add('highlight');
+            setTimeout(() => {
+              boxes[i].classList.remove('highlight');
+              i = i * 2;
+              highlightExponential();
+            }, 1000);
+          } else {
+            binarySearch(arr, Math.floor(i / 2), Math.min(i, n - 1), key);
+          }
+        }
+  
+        if (arr[0] === key) {
+          displayResult(0, key, true);
         } else {
-          displayResult(-1, key, false);
+          highlightExponential();
         }
       }
-
-      search(left, right);
-    }
-
-    // Highlight box during search process
-    function highlightBox(index) {
-      let boxes = document.querySelectorAll('.box');
-      if (index < boxes.length) {
-        boxes[index].classList.add('highlight');
-        setTimeout(() => {
-          boxes[index].classList.remove('highlight');
-        }, 1000);
+  
+      // Binary Search function
+      function binarySearch(arr, left, right, key) {
+        let boxes = document.querySelectorAll('.box');
+  
+        function search(left, right) {
+          if (left <= right) {
+            let mid = Math.floor((left + right) / 2);
+            boxes[mid].classList.add('highlight');
+  
+            setTimeout(() => {
+              if (arr[mid] === key) {
+                boxes[mid].classList.remove('highlight');
+                boxes[mid].classList.add('found');
+                displayResult(mid, key, true);
+              } else {
+                boxes[mid].classList.remove('highlight');
+                boxes[mid].classList.add('not-found');
+                if (arr[mid] < key) {
+                  search(mid + 1, right);
+                } else {
+                  search(left, mid - 1);
+                }
+              }
+            }, 1000);
+          } else {
+            displayResult(-1, key, false);
+          }
+        }
+  
+        search(left, right);
       }
-    }
 
-    // Display search result
-    function displayResult(index, key, found) {
-      let resultElement = document.getElementById('result');
-      if (found) {
-        resultElement.className = "alert alert-success";
-        resultElement.textContent = `Element ${key} found at index ${index}`;
-      } else {
-        resultElement.className = "alert alert-danger";
-        resultElement.textContent = `Element ${key} not found`;
+     // Display search result
+     function displayResult(index, key, found) {
+        let resultElement = document.getElementById('result');
+        if (found) {
+          resultElement.className = "alert alert-success";
+          resultElement.textContent = `Element ${key} found at index ${index}`;
+        } else {
+          resultElement.className = "alert alert-danger";
+          resultElement.textContent = `Element ${key} not found`;
+        }
       }
-    }
   </script>
 
   <!-- Bootstrap JS -->
