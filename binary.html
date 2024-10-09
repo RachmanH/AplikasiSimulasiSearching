@@ -55,7 +55,7 @@
 
   <!-- Bottom Navigation Buttons -->
   <div class="bottom-nav">
-    <a href="index.html"><button>Prev</button></a>
+    <a href="menu.html"><button>Prev</button></a>
     <a href=""><button>Next</button></a>
   </div>
 
@@ -68,7 +68,7 @@
         let randomNumber = Math.floor(Math.random() * 100) + 1; // Number between 1 and 100
         data.push(randomNumber);
       }
-      data.sort((a, b) => a - b); // Sort the data for Jump Search
+      data.sort((a, b) => a - b); // Sort the data for Binary Search
       document.getElementById('data').value = data.join(', ');
       updateDataBoxes();
     }
@@ -96,6 +96,12 @@
     function searchData() {
       let dataInput = document.getElementById('data').value;
       let searchKey = document.getElementById('searchKey').value;
+
+      if (!searchKey || isNaN(searchKey)) {
+        document.getElementById('result').textContent = "Please enter a valid number for the search key.";
+        return;
+      }
+
       let dataArray = dataInput.split(',').map(Number);
 
       // Tampilkan ulang kotak setelah sorting
@@ -107,7 +113,6 @@
       // Mulai binary search
       binarySearch(dataArray, Number(searchKey));
     }
-
 
     // Fungsi Binary Search
     function binarySearch(arr, key) {
